@@ -34,4 +34,4 @@ servicio; la tabla permite encontrar la llamada exacta.
 
 - El dashboard debe caber en un vistazo: sin login, sin navegación profunda.
 - El diseño sigue una referencia editorial monocroma aportada por el cliente.
-- Backend en Railway, frontend en Vercel; CORS por variable de entorno.
+- Backend en Render (Docker), frontend en Vercel; CORS por variable de entorno.
