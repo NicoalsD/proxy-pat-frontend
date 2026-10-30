@@ -11,7 +11,9 @@ interface Props {
 export function ServiceBlock({ summary, label, entries, onOpen }: Props) {
   const alert = summary.errorRate > 0.15;
   const state = summary.totalCalls === 0 ? "Sin llamadas" : alert ? "Sobre el umbral" : "Saludable";
-  const peak = Math.max(...entries.map((entry) => entry.durationMs), 1);
+  // Escala robusta: un arranque en frío de 300 ms no debe aplastar las otras 19 barras.
+  const sorted = entries.map((entry) => entry.durationMs).sort((a, b) => a - b);
+  const scale = sorted[Math.min(sorted.length - 1, Math.ceil(sorted.length * 0.9) - 1)] || 1;
 
   return (
     <article className={alert ? "service is-alert" : "service"}>
@@ -26,7 +28,7 @@ export function ServiceBlock({ summary, label, entries, onOpen }: Props) {
           <span
             key={entry.requestId}
             className={entry.status === "ERROR" ? "bar is-error" : "bar"}
-            style={{ height: `${Math.max(8, (entry.durationMs / peak) * 100)}%` }}
+            style={{ height: `${Math.max(8, Math.min(100, (entry.durationMs / scale) * 100))}%` }}
           />
         ))}
       </div>

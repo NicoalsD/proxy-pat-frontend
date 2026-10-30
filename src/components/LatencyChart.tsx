@@ -15,7 +15,7 @@ interface Props {
   summary: ServiceSummary[];
 }
 
-const INK = ["#141412", "#6C6961", "#A9A69E"];
+const INK = ["#141412", "#6C6961", "#8C8982"];
 const SIGNAL = "#A8231B";
 
 /** Solo las llamadas que fallaron llevan la tinta roja: el error es el dato que importa. */

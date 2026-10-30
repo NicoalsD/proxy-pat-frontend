@@ -5,6 +5,9 @@ Dashboard del proxy: salud de inventario, pedidos y pagos, latencia de las
 
 React 19 · TypeScript · Vite · Recharts · CSS propio (sin framework de estilos).
 
+**En vivo:** https://proxy-pat-frontend.vercel.app · **API:**
+https://proxy-pat-backend.onrender.com
+
 ## Correr
 
 ```bash
@@ -25,7 +28,12 @@ npm run build && npm run preview
 | --- | --- | --- |
 | `VITE_API_URL` | `http://localhost:8080` | base del backend; se inyecta en build |
 
-En Vercel se define como variable de entorno del proyecto antes de desplegar.
+El proyecto de Vercel ya tiene `VITE_API_URL` en Production. Como Vite la
+inyecta en build, un cambio de URL exige redesplegar:
+
+```bash
+npx vercel deploy --prod --yes --build-env VITE_API_URL=https://proxy-pat-backend.onrender.com
+```
 
 ## Pantalla
 
